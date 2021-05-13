@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/myUseState.js"></script>
+    <script src="/useState.js"></script>
+    <title>과제1</title>
+  </head>
+  <body>
+    <div>과제중</div>
+    <script>
+      const test = () => {
+        myUseState(); // 0을 출력합니다.
+        myUseState(); // 1을 출력합니다.
+        myUseState(); // 2를 출력합니다.
+      };
+      test();
+      console.log('경계선');
+      test();
+    </script>
+  </body>
+</html>
