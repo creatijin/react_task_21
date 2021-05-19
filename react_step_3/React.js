@@ -16,13 +16,13 @@ const React = (() => {
       return [hooks[currentHook++], setState];
     },
     useMemo: (fn, dependencies) => {
-      const [prevDependencies, setPrevDependencies] = React.useState(dependencies);
+      const [subscribes, setSubscribes] = React.useState(null);
       const hasNoDeps = !dependencies;
       const deps = hooks[currentHook];
       const hasChangedDeps = deps ? !dependencies.every((el, i) => el === deps[i]) : true;
       if (hasNoDeps || hasChangedDeps) {
-        setPrevDependencies(dependencies);
-        return fn?.();
+        setSubscribes(fn);
+        if (subscribes) return subscribes?.();
       }
     },
     useEffect: (callback, dependencies) => {
