@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./React.js"></script>
+    <title>과제3</title>
+  </head>
+  <body>
+    <div id="warp"></div>
+    <script>
+      function Counter() {
+        const [count, setCount] = React.useState(0);
+        const [nickname, setNickname] = React.useState('');
+        const nicknameLength = React.useMemo(() => console.log('useMemo', nickname), [nickname]);
+        React.useEffect(() => {
+          console.log('이펙트 발생: ', count, nickname);
+        }, [count, nickname]);
+        return {
+          click: () => setCount(count + 1),
+          noop: () => setNickname('count'),
+          render: () => `<div>Count: ${count}</div>`,
+        };
+      }
+      let App;
+      App = React.render(Counter, document.getElementById('wrap'));
+      App.click();
+      App = React.render(Counter, document.getElementById('wrap'));
+      App.noop();
+      App.click();
+      App = React.render(Counter, document.getElementById('wrap'));
+    </script>
+  </body>
+</html>
