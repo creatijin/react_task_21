@@ -1,6 +1,7 @@
 const React = (() => {
   let hooks = [];
   let currentHook = 0;
+  let end_num = 0;
   return {
     render: (Component, domElem) => {
       const Comp = Component();
@@ -35,6 +36,17 @@ const React = (() => {
         if (subscribes) subscribes?.();
         setSubscribes(callback());
         hooks[currentHook] = dependencies;
+      }
+      currentHook++;
+    },
+    setValue: (fn, num) => {
+      const count = end_num;
+      if (count === num) {
+        return;
+      } else {
+        end_num++;
+        fn();
+        return React.setValue(fn, num);
       }
     },
   };

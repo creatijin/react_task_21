@@ -10,19 +10,19 @@
   <body>
     <div id="warp"></div>
     <script>
-      function Counter() {
+      const Counter = () => {
         const [count, setCount] = React.useState(0);
         const [nickname, setNickname] = React.useState('');
         const nicknameLength = React.useMemo(() => console.log('useMemo', nickname), [nickname]);
         React.useEffect(() => {
-          console.log('이펙트 발생: ', count, nickname);
+          console.log('useEffect', count, nickname);
         }, [count, nickname]);
         return {
           click: () => setCount(count + 1),
           noop: () => setNickname('count'),
           render: () => `<div>Count: ${count}</div>`,
         };
-      }
+      };
       let App;
       App = React.render(Counter, document.getElementById('wrap'));
       App.click();
@@ -30,6 +30,20 @@
       App.noop();
       App.click();
       App = React.render(Counter, document.getElementById('wrap'));
+    </script>
+    <script>
+      const test = () => {
+        const [a, setA] = React.useState(1);
+
+        React.useEffect(() => {
+          setTimeout(() => {
+            setA(10);
+          }, 1000);
+        }, []);
+
+        console.log('a', a);
+      };
+      React.setValue(test, 2);
     </script>
   </body>
 </html>
