@@ -1,19 +1,25 @@
 const React = (() => {
   let hooks = [];
   let currentHook = 0;
-  let end_num = 0;
+  let test;
+  let renderTest;
   return {
     render: (Component, domElem) => {
       const Comp = Component();
-      const renderHTML = Comp.render();
-      if (domElem) domElem.innerHTML = renderHTML;
       currentHook = 0;
+      renderTest = Component;
       return Comp;
     },
     useState: (initialValue) => {
       hooks[currentHook] = hooks[currentHook] || initialValue;
       const setStateHookIndex = currentHook;
-      const setState = (newState) => (hooks[setStateHookIndex] = newState);
+      const setState = (newState) => {
+        hooks[setStateHookIndex] = newState;
+        if (!(newState === test)) {
+          renderTest();
+        }
+        test = newState;
+      };
       return [hooks[currentHook++], setState];
     },
     useMemo: (fn, dependencies) => {
@@ -35,19 +41,10 @@ const React = (() => {
       if (hasNoDeps || hasChangedDeps) {
         if (subscribes) subscribes?.();
         setSubscribes(callback());
+        // callback();
         hooks[currentHook] = dependencies;
       }
       currentHook++;
-    },
-    setValue: (fn, num) => {
-      const count = end_num;
-      if (count === num) {
-        return;
-      } else {
-        end_num++;
-        fn();
-        return React.setValue(fn, num);
-      }
     },
   };
 })();

@@ -10,26 +10,26 @@
   <body>
     <div id="warp"></div>
     <script>
-      const Counter = () => {
-        const [count, setCount] = React.useState(0);
-        const [nickname, setNickname] = React.useState('');
-        const nicknameLength = React.useMemo(() => console.log('useMemo', nickname), [nickname]);
-        React.useEffect(() => {
-          console.log('useEffect', count, nickname);
-        }, [count, nickname]);
-        return {
-          click: () => setCount(count + 1),
-          noop: () => setNickname('count'),
-          render: () => `<div>Count: ${count}</div>`,
-        };
-      };
-      let App;
-      App = React.render(Counter, document.getElementById('wrap'));
-      App.click();
-      App = React.render(Counter, document.getElementById('wrap'));
-      App.noop();
-      App.click();
-      App = React.render(Counter, document.getElementById('wrap'));
+      // const Counter = () => {
+      //   const [count, setCount] = React.useState(0);
+      //   const [nickname, setNickname] = React.useState('');
+      //   const nicknameLength = React.useMemo(() => console.log('useMemo', nickname), [nickname]);
+      //   React.useEffect(() => {
+      //     console.log('useEffect', count, nickname);
+      //   }, [count, nickname]);
+      //   return {
+      //     click: () => setCount(count + 1),
+      //     noop: () => setNickname('count'),
+      //     render: () => `<div>Count: ${count}</div>`,
+      //   };
+      // };
+      // let App;
+      // App = React.render(Counter, document.getElementById('wrap'));
+      // App.click();
+      // App = React.render(Counter, document.getElementById('wrap'));
+      // App.noop();
+      // App.click();
+      // App = React.render(Counter, document.getElementById('wrap'));
     </script>
     <script>
       const test = () => {
@@ -43,7 +43,8 @@
 
         console.log('a', a);
       };
-      React.setValue(test, 2);
+      let App;
+      App = React.render(test);
     </script>
   </body>
 </html>
